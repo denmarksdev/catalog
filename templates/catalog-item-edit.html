@@ -33,12 +33,12 @@
 
         <div class="input-container">
             <label class="label" for="title">Title</label>
-            <input maxlength="20" type="text" name="title" id="title" value="{{ item.title }}" required>
+            <input maxlength="30" type="text" name="title" id="title" value="{{ item.title }}" required>
         </div>
 
         <div class="input-container">
             <label class="label" for="description">Description</label>
-            <textarea class="input-textarea" name="description" id="description" value="description" required>{{ item.description }}</textarea>
+            <textarea class="input-textarea" name="description" maxlength="300" id="description" value="description" required>{{ item.description }}</textarea>
         </div>
 
         <div class="input-container">

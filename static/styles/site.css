@@ -120,7 +120,7 @@ figure {
 
 .button-add {
     position: absolute;
-    top: 0;
+    top: 1.7em;
     right: 0;
     margin: 20px;
     color: #445E93;
@@ -246,6 +246,10 @@ header, footer {
     font-size: 0.8em
 }
 
+/* CatalogItem Details */
+
+
+
 
 /*  Edit-item
 ------------------------------------*/
@@ -338,10 +342,11 @@ header, footer {
     #menu {
         display: inline-block;
     }
-    /* Catalog Item */
+    /* Catalog Items */
     .button-add {
         margin: 5px;
         max-width: 80px;
         max-height: 80px;
+        top: 0;
     }
 }

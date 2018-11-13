@@ -2,6 +2,12 @@
 {% block body %}
 
 <div class="center-container content lists">
+    {% if user_is_logged() %}
+        <a class="button button-add" href="{{ url_for('catalog.add_item') }}">
+            <i class="fas fa-plus-circle fa-3x"></i>
+        </a>
+    {% endif %}
+
     <div class="menu-container">
         <h1>Categories</h1>
         <a id=menu>
