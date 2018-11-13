@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Catalog App - Udacity project">
+    <meta name="authos" content="Denis Marques">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Catalog</title>
+    <!-- Google sign api -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//apis.google.com/js/platform.js?onload=start"></script>
+    <!-- End Google sign api -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/site.css')}}">
+</head>
+
+<body>
+    <div class="main-container">
+        <header role="heading">
+            <div class="center-container header-container">
+                <div class="brand-container">
+                    <a class="brand" href="{{ url_for('catalog.show_catalog') }}">
+                        Catalog App
+                    </a>
+                    <a id=menu>
+                        <i class="fas fa-bars  fa-2x"></i>
+                    </a>
+                </div>
+                <nav>
+                    <!--TODO: Fix this is not updating >> 'username' in login_session -->
+                    {% if user_is_logged() %}
+                        <div class="logout-container">
+                            <span class="user-name"> Welcome <strong>{{ get_welcome_user() }}</strong> :)</span>
+                            <a class="button button-header" onclick="logout()">Logout</a>
+                        </div>
+                    {% else %}
+                        <a class="button button-header" href="{{ url_for('auth_controller_pages.show_login') }}">Login</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </header>
+        <main>
+            {% block body %}
+            {% endblock %}
+        </main>
+
+    </div>
+
+    <script>
+        function logout() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/auth/logout',
+                success: function (result) {
+                    if (result) {
+                        window.location.href = "/catalog";
+                    } else {
+                        $('#result').html('Failed to log out.');
+                    }
+                }
+            });
+        }
+
+        /*
+       * Open the drawer when the menu ison is clicked.
+       */
+        var menu = document.querySelector('#menu');
+        var main = document.querySelector('main');
+        var drawer = document.querySelector('.categories');
+
+        menu.addEventListener('click', function (e) {
+            drawer.classList.toggle('open');
+            e.stopPropagation();
+
+        });
+        main.addEventListener('click', function () {
+            drawer.classList.remove('open');
+        });
+    </script>
+</body>
+
+</html>

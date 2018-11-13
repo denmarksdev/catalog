@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+{% block body %}
+<div class="center-container content column">
+    <h1>{{ item.title }}</h1>
+
+    <figure class="img-responsive">
+        <img class="img-responsive" src="{{ image_url }}" alt="{{ item.title }} - Category Image">
+        {% if not is_owner %}
+            <figcaption>
+                <span class="author"> create by <strong>{{ author_name }}</strong> at {{ item.date.strftime('%d, %b %Y') }}</span>
+            </figcaption>
+        {% endif %}
+    </figure>
+
+    <p>
+        {{ item.description }}
+    </p>
+    {% if is_owner %}
+    <nav>
+        <a class="button button-confirm" href="/catalog/{{ item.category.name }}/{{ item.title }}/edit">Edit</a>
+        <a class="button button-danger" href="/catalog/{{ item.category.name }}/{{ item.title }}/delete">Delete</a>
+    </nav>
+    {% endif %}
+    <br>
+</div>
+{% endblock %}

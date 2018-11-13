@@ -1,0 +1,149 @@
+{% extends "template.html" %}
+{% block body %}
+<div class="center-container content column">
+    <h1 class="titulo">Login</h1>
+
+    <!-- MESSAGE FLASHING -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="message-alert">
+        {% for message in messages %}
+        <li><strong>{{ message }}</strong></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <!-- END MESSAGE FLASHING -->
+
+    <form method="POST" id="login-form">
+
+        <!-- Catalogitem ID -->
+        <div class="input-container">
+            <input class="login-input" type="text" name="username" id="username" placeholder="username" required>
+            <input class="login-input" type="password" name="password" id="password" placeholder="password" required>
+        </div>
+
+        <input class="button button-confirm" type="submit" value="Submit">
+        <a class="button " href="{{ url_for('auth_controller_pages.show_signup_form') }}">Signup</a>
+    </form>
+
+    <div class="social-logins">
+        <div id="signinButton">
+            <span class="g-signin" data-scope="openid email" data-clientid="631682872143-vbv9knrpl30bkkc9tc2l0vkrcgi25ocl.apps.googleusercontent.com"
+                data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin"
+                data-callback="signInCallback" data-approvalprompt="force">
+            </span>
+        </div>
+        <button class="button">
+            <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+                <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+            </fb:login-button>
+        </button>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="//apis.google.com/js/platform.js?onload=start"></script>
+<script>
+
+    // Basic auth
+
+    $(document).ready(function () {
+        $('#login-form').submit(function () {
+            var username = $('#username').val();
+            var password = $('#password').val();
+
+            $.ajax(
+                {
+                    'password': password,
+                    'username': username,
+                    'url': 'http://localhost:8080/api/v1/auth/basic?state={{STATE}}',
+                    'type': 'POST',
+                    'success': function () { window.location = '/catalog'; },
+                    'error': function () { alert('Bad Login Details'); },
+                }
+            );
+            return false;
+        });
+    });
+
+    // google oauth2.0
+    function signInCallback(authResult) {
+        if (authResult['code']) {
+            // Hide the sign-in button now that the user is authorized
+            $('#signinButton').attr('style', 'display: none');
+            // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/auth/gconnect?state={{STATE}}',
+                processData: false,
+                data: authResult['code'],
+                contentType: 'application/octet-stream; charset=utf-8',
+                success: function (result) {
+                    // Handle or verify the server response if necessary.
+                    if (result) {
+                        $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
+                        setTimeout(function () {
+                            window.location.href = "/catalog";
+                        }, 4000);
+
+                    } else if (authResult['error']) {
+                        console.log('There was an error: ' + authResult['error']);
+                    } else {
+                        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                    }
+                }
+            });
+        }
+    }
+
+    //Facebook Auth
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '488839361612995',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v3.2'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    function sendTokenToServer() {
+        var access_token = FB.getAuthResponse()['accessToken'];
+        console.log(access_token)
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function (response) {
+            console.log('Successful login for: ' + response.name);
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/auth/fbconnect?state={{STATE}}',
+                processData: false,
+                data: access_token,
+                contentType: 'application/octet-stream; charset=utf-8',
+                success: function (result) {
+                    alert("")
+                    // Handle or verify the server response if necessary.
+                    if (result) {
+                        $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
+                        setTimeout(function () {
+                            window.location.href = "/catalog";
+                        }, 4000);
+
+                    } else {
+                        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                    }
+                }
+            });
+        })
+    };
+</script>
+{% endblock %}

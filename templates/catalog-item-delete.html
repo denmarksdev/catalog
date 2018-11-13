@@ -1,0 +1,13 @@
+{% extends "template.html" %}
+{% block body %}
+
+<div class="center-container content column">
+    <h1>Delete Item</h1>
+    <form method="POST" action="/catalog/{{ item.category.name }}/{{ item.title }}/delete">
+        <img src="{{ url_image }}" id="imgPreview" alt="Category image">
+        <p>Are you sure you want to delete?</p>
+        <input class="button button-danger" type="submit" value="Delete">
+    </form>
+</div>
+
+{% endblock %}
