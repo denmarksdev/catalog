@@ -4,7 +4,9 @@ from data.data_access import UserDao, CatalogItemDao, CategoryDao
 from controllers.auth_controller import login_session, is_logged
 from constants import IMAGE_PATH
 import requests
-
+# File managment
+from os import remove as remove_file
+from os.path import exists as files_exists
 
 catalog_controller = Blueprint('catalog',
                                __name__,
@@ -113,12 +115,62 @@ def catalog_show_item_details(category_name, item_title):
 
 @catalog_controller.route('/<string:category_name>/<string:item_title>/edit', methods=['GET', 'POST'])
 def edit_item(category_name, item_title):
-    return "Edit Catalog item page"
+    category_dao = CategoryDao()
+    item_dao = CatalogItemDao()
+
+    if (not is_logged()):
+        return redirect(url_for('show_login'))
+
+    if (request.method == 'GET'):
+        categories = category_dao.get_all()
+        item = item_dao.find_by_category_name_and_title(category_name,
+                                                        item_title)
+
+        return render_template('catalog-item-edit.html',
+                               category_name=category_name,
+                               categories=categories,
+                               item=item,
+                               action="/catalog/%s/%s/edit" % (
+                                   category_name, item_title),
+                               url_image=get_url_image(item.image))
+    else:  # POST
+        catalog_id = int(request.form['catalog_id'])
+        item = item_dao.find(catalog_id)
+        set_item_info(item, request.form, )
+        item_dao.save(item)
+
+        # Check image is saved on database
+        item = item_dao.find(item.id)
+        if (item.image):
+            # Save image from file
+            image_file = bytearray(item.image.data)
+            file_image = open(IMAGE_PATH + item.image.get_name(), "w+")
+            file_image.write(item.image.data)
+
+        return redirect(url_for('catalog.show_catalog'))
 
 
-@catalog_controller.route('/<string:category_name>/<string:item_title>/edit', methods=['GET', 'POST'])
+@catalog_controller.route('/<string:category_name>/<string:item_title>/delete', methods=['GET', 'POST'])
 def delete_item(category_name, item_title):
-    return "Delete Catalog item page"
+    dao = CatalogItemDao()
+
+    if (not is_logged()):
+        return redirect(url_for('show_login'))
+
+    item = dao.find_by_title(item_title)
+
+    if (request.method == 'GET'):
+        return render_template('catalog-item-delete.html',
+                               item=item,
+                               url_image=get_url_image(item.image))
+    elif (request.method == 'POST'):
+        # Removes the image file from the server
+        image_path = IMAGE_PATH + item.image.get_name()
+        if (item.image and files_exists(image_path)):
+            remove_file(IMAGE_PATH + item.image.get_name())
+
+        dao.delete(item)
+        return redirect(url_for('catalog.show_catalog'))
 
 
 # Auxiliary Functions
