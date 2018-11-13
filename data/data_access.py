@@ -3,8 +3,7 @@ from sqlalchemy import desc, func
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Category, CatalogItem, CatalogImage, User, engine
 
-# Perform CRUD Operation
-
+# Perform CRUD Operation for Catalog database
 
 class BaseDao(object):
     """
@@ -120,7 +119,7 @@ class CatalogItemDao(BaseDao):
                 filter_by(id=id). \
                 one()
         except:
-            print("Error find user by id (%s) " % id)
+            print("Error find CatalogItem by id (%s) " % id)
 
     def find_by_title(self, title):
         try:
@@ -129,7 +128,7 @@ class CatalogItemDao(BaseDao):
                 filter_by(title=title). \
                 one()
         except:
-            print("Erro find user by title (%s) " % title)
+            print("Erro find CatalogItem by title (%s) " % title)
 
     def find_by_category_name_and_title(self, category_name, catalog_title):
         return self.session. \
