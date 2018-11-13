@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from data.database_setup import CatalogItem, CatalogImage
-from data.data_access import CatalogItemDao, CategoryDao
+from data.data_access import UserDao, CatalogItemDao, CategoryDao
 from controllers.auth_controller import login_session, is_logged
 from constants import IMAGE_PATH
 import requests
@@ -82,7 +82,33 @@ def add_item():
 
 @catalog_controller.route('/<string:category_name>/<string:item_title>')
 def catalog_show_item_details(category_name, item_title):
-    return "Catalog Item Details page"
+    category_dao = CategoryDao()
+    item_dao = CatalogItemDao()
+
+    item = item_dao.find_by_category_name_and_title(category_name, item_title)
+    image_url = get_url_image(item.image)
+    categories = category_dao.get_all()
+
+    # Verify the user can edit CatalogItem
+    is_owner = is_logged() and (item.user_id == login_session['user_id'])
+
+    print(is_logged())
+
+    print(login_session)
+
+    # Search the author of catalog item
+    author_name = ""
+    if (not is_owner):
+        user_dao = UserDao()
+        author = user_dao.find(item.user_id)
+        author_name = author.name
+
+    return render_template('catalog-item-detail.html',
+                           categories=categories,
+                           item=item,
+                           is_owner=is_owner,
+                           author_name=author_name,
+                           image_url=image_url)
 
 
 @catalog_controller.route('/<string:category_name>/<string:item_title>/edit', methods=['GET', 'POST'])
