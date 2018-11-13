@@ -129,7 +129,7 @@ def googleconnect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets('secrets_google.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -196,7 +196,7 @@ def googleconnect():
 
     user = dao.find_by_username(login_session['email'])
     if (user is None):
-        user_id = createUser(login_session, dao)
+        user_id = createUser(dao)
     else:
         user_id = user.id
 

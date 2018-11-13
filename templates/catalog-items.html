@@ -2,13 +2,20 @@
 {% block body %}
 
 <div class="center-container content lists">
-    <aside class="categories" role="listitem">
+    <div class="menu-container">
         <h1>Categories</h1>
-        <div class="items-container">
+        <a id=menu>
+            <i class="fas fa-bars  fa-2x"></i>
+        </a>
+    </div>
+
+    <aside class="categories" role="listitem">
+        <h1 class="category-title">Categories</h1>
+        <nav class="category items-container">
             {% for category in categories %}
-            <a class="item category" href="/catalog/{{ category.name }}/items">{{ category.name }} </a>
+            <a class="item category" href="/catalog/{{ category.name }}/items">{{ category.name }}</a>
             {% endfor %}
-        </div>
+        </nav>
     </aside>
     <section role="listitem">
         {% if items.count() > 1 %}

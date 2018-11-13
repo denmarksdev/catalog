@@ -91,12 +91,10 @@ def catalog_show_item_details(category_name, item_title):
     image_url = get_url_image(item.image)
     categories = category_dao.get_all()
 
-    # Verify the user can edit CatalogItem
-    is_owner = is_logged() and (item.user_id == login_session['user_id'])
-
     print(is_logged())
 
-    print(login_session)
+    # Verify the user can edit CatalogItem
+    is_owner = is_logged() and (item.user_id == login_session['user_id'])
 
     # Search the author of catalog item
     author_name = ""

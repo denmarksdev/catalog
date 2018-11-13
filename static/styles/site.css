@@ -120,7 +120,7 @@ figure {
 
 .button-add {
     position: absolute;
-    bottom: 0;
+    top: 0;
     right: 0;
     margin: 20px;
     color: #445E93;
@@ -161,31 +161,40 @@ header, footer {
     font-weight: 700;
 }
 
-#menu {
-    display: none;
-    cursor: pointer;
-}
-
 
 /*  Category & CatalogItem
 ------------------------------------*/
 
+.item {
+    color: #445E93;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    padding: 6px 0;
+    margin: 4px 0;
+}
 
-/* CatalogItem */
+.item:hover {
+    color: #445E93;
+}
 
 .items-container {
     display: flex;
     flex-direction: column;
 }
 
-.item {
-    color: #445E93;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-}
-
 
 /* Category */
+
+.menu-container {
+    display: none;
+}
+
+#menu {
+    display: none;
+    cursor: pointer;
+    color: #445E93;
+    margin: 5px;
+}
 
 .categories.open {
     transform: translate(0, 0)
@@ -283,17 +292,14 @@ header, footer {
 }
 
 @media screen and (max-width: 500px) {
-    
     /* Header */
-    .header-container {
-        flex-direction: column;
-        align-items: flex-start;
+    .brand {
+        font-size: 1.3em;
     }
-
-    .logout-container {
-        margin-top: 15px;
+    .user-name {
+        font-size: 0.8em;
     }
-
+    /* Categories */
     .lists {
         flex-direction: column;
     }
@@ -322,13 +328,19 @@ header, footer {
     .categories {
         border: none;
     }
+    .menu-container {
+        display: flex;
+        align-items: center;
+    }
+    .menu-container > .category-title {
+        color: #445E93;
+    }
     #menu {
         display: inline-block;
     }
+    /* Catalog Item */
     .button-add {
-        position: unset;
-        order: -1;
-        margin: 0px;
+        margin: 5px;
         max-width: 80px;
         max-height: 80px;
     }

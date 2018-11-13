@@ -34,7 +34,7 @@ class UserDao(BaseDao):
     def find(self, user_id):
         return self.session. \
             query(User). \
-            filter_by(id=id) . \
+            filter_by(id=user_id) . \
             one()
 
     def find_by_username(self, username):
