@@ -1,4 +1,5 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
+from data.data_access import CatalogItemDao, CategoryDao
 
 catalog_controller = Blueprint('catalog',
                                __name__,
@@ -10,7 +11,14 @@ catalog_controller = Blueprint('catalog',
 
 @catalog_controller.route('/')
 def show_catalog():
-    return "Catalog page"
+    category_dao = CategoryDao()
+    item_dao = CatalogItemDao()
+
+    lastedItems = item_dao.get_lasteds()
+    categories = category_dao.get_all()
+    return render_template('catalog.html',
+                           categories=categories,
+                           lastedItems=lastedItems)
 
 
 @catalog_controller.route('/<string:category_name>/items')
