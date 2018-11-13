@@ -23,7 +23,15 @@ def show_catalog():
 
 @catalog_controller.route('/<string:category_name>/items')
 def show_items_by_category(category_name):
-    return "Catalog By Category page "
+    category_dao = CategoryDao()
+    item_dao = CatalogItemDao()
+
+    categories = category_dao.get_all()
+    items = item_dao.get_by_category_name(category_name)
+    return render_template('catalog-items.html',
+                           category_name=category_name,
+                           categories=categories,
+                           items=items)
 
 
 @catalog_controller.route('/<string:category_name>/<string:item_title>')
