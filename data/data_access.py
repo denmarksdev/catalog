@@ -1,3 +1,5 @@
+from datetime import datetime
+from sqlalchemy import desc, func
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Category, CatalogItem, CatalogImage, User, engine
 
@@ -113,14 +115,21 @@ class CatalogItemDao(BaseDao):
             filter(Category.name == category_name)
 
     def find(self, id):
-        return self.session.query(CatalogItem). \
-            filter_by(id=id). \
-            one()
+        try:
+            return self.session.query(CatalogItem). \
+                filter_by(id=id). \
+                one()
+        except:
+            print("Error find user by id (%s) " % id)
 
     def find_by_title(self, title):
-        return self.session.query(CatalogItem). \
-            filter_by(title=title). \
-            one()
+        try:
+            return self.session. \
+                query(CatalogItem). \
+                filter_by(title=title). \
+                one()
+        except:
+            print("Erro find user by title (%s) " % title)
 
     def find_by_category_name_and_title(self, category_name, catalog_title):
         return self.session. \
