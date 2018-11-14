@@ -78,7 +78,8 @@ class CatalogItem(Base):
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'image': "http://localhost:8080/static/images/" + self.image.get_name()
+            'image': "http://localhost:8080/static/images/" + self.image.get_name(),
+            'category_id': self.category_id
         }
 
 
