@@ -137,11 +137,9 @@ def edit_item(category_name, item_title):
         set_item_info(item, request.form, )
         item_dao.save(item)
 
-        # Check image is saved on database
+        # Create image file to save foldes images
         item = item_dao.find(item.id)
         if (item.image):
-            # Save image from file
-            image_file = bytearray(item.image.data)
             file_image = open(IMAGE_PATH + item.image.get_name(), "w+")
             file_image.write(item.image.data)
 
@@ -161,11 +159,12 @@ def delete_item(category_name, item_title):
         return render_template('catalog-item-delete.html',
                                item=item,
                                url_image=get_url_image(item.image))
-    elif (request.method == 'POST'):
+    else:  # POST
         # Removes the image file from the server
-        image_path = IMAGE_PATH + item.image.get_name()
-        if (item.image and files_exists(image_path)):
-            remove_file(IMAGE_PATH + item.image.get_name())
+        if item.image:
+            image_path = IMAGE_PATH + item.image.get_name()
+            if (item.image and files_exists(image_path)):
+                remove_file(IMAGE_PATH + item.image.get_name())
 
         dao.delete(item)
         return redirect(url_for('catalog.show_catalog'))

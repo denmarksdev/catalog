@@ -2,8 +2,10 @@ from datetime import datetime
 from sqlalchemy import desc, func
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Category, CatalogItem, CatalogImage, User, engine
+from constants import IMAGE_PATH
 
 # Perform CRUD Operation for Catalog database
+
 
 class BaseDao(object):
     """
@@ -161,7 +163,6 @@ def create_sample_data():
     """
 
     user_dao = UserDao()
-
     user_den = user_dao.find_by_username("den@test.com")
     if (user_den):
         # Database has already been populated exit
@@ -169,6 +170,8 @@ def create_sample_data():
 
     print("")
     print("Creating sample data ...")
+
+    # Create user
     print("Creating users ...")
 
     user_den = User(name="den", username="den@test.com")
@@ -179,6 +182,7 @@ def create_sample_data():
 
     user_dao.save_all([user_den, user_maria])
 
+    # Create caegories
     print("Creating categories ...")
 
     category_names = ["Soccer", "Basketball", "Frisbie",
@@ -191,8 +195,38 @@ def create_sample_data():
         category = Category(name=name)
         categories.append(category)
 
-    item_dao = CategoryDao()
-    item_dao.save_all(categories)
+    category_dao = CategoryDao()
+    category_dao.save_all(categories)
+
+    # Create CatalogItem
+    print("Creating Snowboarding item")
+
+    category = category_dao.find_by_name("Snowboarding")
+
+    item = CatalogItem(title="Snowboard",
+                       date=datetime.now(),
+                       user_id=user_den.id,
+                       category_id=category.id)
+
+    item.description = """
+    An objest used for one of the greatest sports ever...SNOWBOARDING.
+    Whether your're carving down a steep mountain side, ripping up the park with insane mad shit,
+    just cruising or a beginner...Once you go Board you never go back.
+    """
+    # Create image sample
+    file = open("static/images/snowboard.jpg")
+    image = CatalogImage()
+    image.data = file.read()
+    image.suffix = "png"
+    item.image = image
+
+    item_dao = CatalogItemDao()
+    item_dao.save(item)
+
+    # Create Image file from database
+    item = item_dao.find_by_title("Snowboard")
+    file = open(IMAGE_PATH + item.image.get_name(), 'w+')
+    file.write(item.image.data)
 
     print("Data sample is created !!!")
     print("")
