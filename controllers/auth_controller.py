@@ -39,6 +39,7 @@ auth_pages = Blueprint("auth_controller_pages",
 def show_login():
     state = generate_anty_forgery_state_token()
     login_session['state'] = state
+    print(login_session['state'])
     return render_template('login.html', STATE=state)
 
 
@@ -278,7 +279,7 @@ def fbconnecty():
     result = h.request(url, 'GET')[1]
 
     data = json.loads(result)
-    print(data['name'])
+    print(data)
 
     login_session["provider"] = FACEBOOK_PROVIDER
     login_session["username"] = data["name"]
@@ -381,6 +382,9 @@ def generate_anty_forgery_state_token():
 
 
 def is_valid_state_token():
+    print("is_valid_state_token")
+    print(request.args)
+    print(login_session)
     return (request.args.get('state') != login_session['state'])
 
 
