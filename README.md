@@ -87,4 +87,14 @@ Returns all categories and their respective Catalog Items.
 ```
 
 # Screenshots
+## Catalog
 
+![](https://github.com/denmarksdev/catalog/blob/master/catalog.JPG?raw=true "Catalog")
+
+## Catalog Item Detais
+
+![](https://github.com/denmarksdev/catalog/blob/master/catalog-item-details.JPG?raw=true "Catalog Item Details")
+
+## Catalog Mobile
+
+![](https://github.com/denmarksdev/catalog/blob/master/catalog-mobile.JPG?raw=true "Catalog in mobile")
