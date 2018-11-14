@@ -96,8 +96,3 @@ Returns all categories and their respective Catalog Items.
 ## Catalog in Mobile
 
 ![](https://github.com/denmarksdev/catalog/blob/master/catalog-mobile.JPG?raw=true "Catalog in mobile")
-
-
-
-
-Create project infrastructure
