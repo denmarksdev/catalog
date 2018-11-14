@@ -17,8 +17,11 @@ def get_catalog():
     return jsonify(Category=[c.serialize_with_catalog_items for c in categories])
 
 
-@api_controller.route("/item/<string:title>")
+@api_controller.route("/catalog.json/<string:title>")
 def get_catalog_item(title):
+    """
+    Return Catalog Item by title
+    """
     dao = CatalogItemDao()
     itemCatalog = dao.find_by_title(title)
     if (itemCatalog == None):

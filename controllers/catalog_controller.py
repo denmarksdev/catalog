@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import (Blueprint, render_template,
+                   request, redirect,
+                   url_for, flash)
 from data.database_setup import CatalogItem, CatalogImage
 from data.data_access import UserDao, CatalogItemDao, CategoryDao
 from controllers.auth_controller import login_session, is_logged
@@ -111,7 +113,8 @@ def catalog_show_item_details(category_name, item_title):
                            image_url=image_url)
 
 
-@catalog_controller.route('/<string:category_name>/<string:item_title>/edit', methods=['GET', 'POST'])
+@catalog_controller.route('/<string:category_name>/<string:item_title>/edit',
+                          methods=['GET', 'POST'])
 def edit_item(category_name, item_title):
     category_dao = CategoryDao()
     item_dao = CatalogItemDao()

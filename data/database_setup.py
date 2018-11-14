@@ -1,4 +1,6 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, LargeBinary, UniqueConstraint
+from sqlalchemy import (Column, ForeignKey,
+                        Integer, String, DateTime,
+                        LargeBinary, UniqueConstraint)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
@@ -78,7 +80,8 @@ class CatalogItem(Base):
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'image': "http://localhost:8080/static/images/" + self.image.get_name(),
+            'image': ("http://localhost:8080/static/images/%s"
+                      % self.image.get_name()),
             'category_id': self.category_id
         }
 

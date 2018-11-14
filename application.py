@@ -3,7 +3,8 @@
 from flask import Flask, redirect, url_for
 from data.data_access import create_sample_data
 from controllers.api_controller import api_controller
-from controllers.auth_controller import auth_controller, auth_pages, is_logged, get_user_name
+from controllers.auth_controller import (auth_controller, auth_pages,
+                                         is_logged, get_user_name)
 from controllers.catalog_controller import catalog_controller
 
 app = Flask(__name__)
@@ -22,6 +23,9 @@ def main_route():
 
 @app.context_processor
 def utility_processor():
+    """
+    Global function, use in Jinja2 templates
+    """
     def user_is_logged():
         return is_logged()
 

@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, make_response, request, redirect, url_for, json, jsonify, flash
+from flask import (Blueprint, render_template, make_response,
+                   request, redirect, url_for,
+                   json, jsonify, flash)
 from data.database_setup import User
 from data.data_access import UserDao
 from constants import BASE_API_URL, IMAGE_PATH
@@ -118,7 +120,7 @@ def logout():
 @auth_controller.route("/auth/gconnect", methods=["POST"])
 def googleconnect():
     """
-     Gathers data from Google Sign In API and places it inside a session variable.
+     Get Google Sign In API and places it inside a session variable.
     """
 
     if is_valid_state_token():
@@ -171,7 +173,7 @@ def googleconnect():
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps('Current user is already connected.'),
+        response = make_response(json.dumps('Current user is connected.'),
                                  200)
         response.headers['Content-Type'] = 'application/json'
         return response
@@ -208,7 +210,10 @@ def googleconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+    output += """
+    " style = "width: 300px; height: 300px;border-radius: 150px;
+    -webkit-border-radius: 150px;-moz-border-radius: 150px;">
+    """
 
     print "done!"
     print(output)
@@ -226,7 +231,8 @@ def googledisconnect():
     print 'In gdisconnect access token is %s', access_token
     print 'User name is: '
     print login_session['username']
-    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
+    url = ('https://accounts.google.com/o/oauth2/revoke?token=%s'
+           % login_session['access_token'])
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
     print 'result is '
@@ -258,20 +264,21 @@ def fbconnecty():
     app_secret = json.loads(open('secrets_facebook.json', 'r').read())[
         'web']['app_secret']
 
-    url = 'https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=%s&client_secret=%s&fb_exchange_token=%s' % (
-        app_id, app_secret, access_token)
+    url = ('https://graph.facebook.com/oauth/access_token' +
+           '?grant_type=fb_exchange_token&client_id=%s ' +
+           ' &client_secret=%s&fb_exchange_token=%s'
+           % (app_id, app_secret, access_token))
 
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
 
     userinfo_url = "https://graph.facebook.com/v3.2/me"
 
-    # curl -i -X GET \
-    # "https://graph.facebook.com/v3.2/me?fields=id%2Cname&access_token=EAAXG8evn8rsBAJ0R5wOtbKllg6Yc6DKKAAOEF10ekf0tALjgZCfo4q6docPr3T6IsePuimVAQAo7FmqpBGRwmP1sdVZB3AAFBkZCqDLZBdhHCIXZAr2OtxQVEOk0EQOvBZCcDZAP7m9P8h8QAwlcgQyDECB1YRFgHKjxx551ERCgSslaB5JZClSieTgVlQkm12QZD"
-
     token = result.split(',')[0].split(':')[1].replace('"', '')
 
-    url = 'https://graph.facebook.com/v3.2/me?fields=name,id,email&access_token=%s' % token
+    url = ('https://graph.facebook.com/v3.2/me' +
+           ' ?fields=name,id,email&access_token=%s'
+           % token)
 
     url = url.replace(',', '%2C')
 
@@ -287,7 +294,9 @@ def fbconnecty():
     login_session["facebook_id"] = data["id"]
 
     # Get user picture
-    url = 'https://graph.facebook.com/v3.2/me/picture?access_token=%s&redirect=0&height=200&width=200' % token
+    url = ('https://graph.facebook.com/v3.2/me/picture' +
+           '?access_token=%s&redirect=0&height=200&width=200'
+           % token)
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     data = json.loads(result)
@@ -311,7 +320,10 @@ def fbconnecty():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+    output += """
+    " style = "width: 300px; height: 300px;border-radius: 150px;
+    -webkit-border-radius: 150px;-moz-border-radius: 150px;">
+    """
     print "done!"
     print(output)
     return output

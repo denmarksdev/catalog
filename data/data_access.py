@@ -1,7 +1,9 @@
 from datetime import datetime
 from sqlalchemy import desc, func
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Category, CatalogItem, CatalogImage, User, engine
+from database_setup import (Base, Category,
+                            CatalogItem, CatalogImage,
+                            User, engine)
 from constants import IMAGE_PATH
 
 # Perform CRUD Operation for Catalog database
@@ -135,7 +137,8 @@ class CatalogItemDao(BaseDao):
     def find_by_category_name_and_title(self, category_name, catalog_title):
         return self.session. \
             query(CatalogItem). \
-            filter(Category.name == category_name, CatalogItem.title == catalog_title). \
+            filter(Category.name == category_name,
+                   CatalogItem.title == catalog_title). \
             one()
 
     def has_item_by_title(self, title):
@@ -206,8 +209,10 @@ def create_sample_data():
                        user_id=user_den.id,
                        category_id=category.id)
     item.description = """
-    An object used for one of the greatest sports ever...SNOWBOARDING. Whether you're carving down a steep mountainside, 
-    ripping up the park with insane mad shit, just cruising or a beginner...Once you go, Board, you never go back.
+    An object used for one of the greatest sports ever...SNOWBOARDING.
+    Whether you're carving down a steep mountainside,     ripping up
+    the park with insane mad shit, just cruising or a beginner...Once
+    you go, Board, you never go back.
     """
     # Create image sample
     file = open("static/images/snowboard.jpg")
@@ -229,11 +234,16 @@ def create_sample_data():
                        user_id=user_maria.id,
                        category_id=category.id)
     item.description = """
-    is the ball used in the sport of association football. The name of the ball varies according to whether the sport is called "football",
-    "soccer", or "association football". The ball's spherical shape, as well as its size, weight, and material composition, are specified by Law 2
-     of the Laws of the Game maintained by the International Football Association Board. Additional, more stringent, standards are specified by FIFA and 
-     subordinate governing bodies for the balls used in the competitions they sanction.
+    is the ball used in the sport of association football. The name of the ball
+    varies according to whether the sport is called "football", "soccer", or
+    "association football". The ball's spherical shape, as well as its size,
+    weight, and material composition, are specified by Law 2 of the Laws of
+    the Game maintained by the International Football Association Board.
+    Additional, more stringent, standards are specified by FIFA and
+    subordinate governing bodies for the balls used in the
+    competitions they sanction.
     """
+
     # Create image sample
     file = open("static/images/soccer-ball.jpg")
     image = CatalogImage()
