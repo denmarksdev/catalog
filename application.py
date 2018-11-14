@@ -24,7 +24,7 @@ def main_route():
 @app.context_processor
 def utility_processor():
     """
-    Global function, use in Jinja2 templates
+    Global functions, use in Jinja2 templates.
     """
     def user_is_logged():
         return is_logged()
