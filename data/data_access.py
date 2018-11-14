@@ -162,10 +162,10 @@ def create_sample_data():
     Initializa database with sample data
     """
 
+    # Verify the database alredy populate
     user_dao = UserDao()
     user_den = user_dao.find_by_username("den@test.com")
     if (user_den):
-        # Database has already been populated exit
         return
 
     print("")
@@ -198,20 +198,16 @@ def create_sample_data():
     category_dao = CategoryDao()
     category_dao.save_all(categories)
 
-    # Create CatalogItem
-    print("Creating Snowboarding item")
-
+    # Create CatalogItems
+    print("Creating Snowboard item")
     category = category_dao.find_by_name("Snowboarding")
-
     item = CatalogItem(title="Snowboard",
                        date=datetime.now(),
                        user_id=user_den.id,
                        category_id=category.id)
-
     item.description = """
-    An objest used for one of the greatest sports ever...SNOWBOARDING.
-    Whether your're carving down a steep mountain side, ripping up the park with insane mad shit,
-    just cruising or a beginner...Once you go Board you never go back.
+    An object used for one of the greatest sports ever...SNOWBOARDING. Whether you're carving down a steep mountainside, 
+    ripping up the park with insane mad shit, just cruising or a beginner...Once you go, Board, you never go back.
     """
     # Create image sample
     file = open("static/images/snowboard.jpg")
@@ -219,12 +215,35 @@ def create_sample_data():
     image.data = file.read()
     image.suffix = "png"
     item.image = image
-
     item_dao = CatalogItemDao()
     item_dao.save(item)
-
     # Create Image file from database
     item = item_dao.find_by_title("Snowboard")
+    file = open(IMAGE_PATH + item.image.get_name(), 'w+')
+    file.write(item.image.data)
+
+    print("Creating Soccer Ball")
+    category = category_dao.find_by_name("Soccer")
+    item = CatalogItem(title="Soccer Ball",
+                       date=datetime.now(),
+                       user_id=user_maria.id,
+                       category_id=category.id)
+    item.description = """
+    is the ball used in the sport of association football. The name of the ball varies according to whether the sport is called "football",
+    "soccer", or "association football". The ball's spherical shape, as well as its size, weight, and material composition, are specified by Law 2
+     of the Laws of the Game maintained by the International Football Association Board. Additional, more stringent, standards are specified by FIFA and 
+     subordinate governing bodies for the balls used in the competitions they sanction.
+    """
+    # Create image sample
+    file = open("static/images/soccer-ball.jpg")
+    image = CatalogImage()
+    image.data = file.read()
+    image.suffix = "jpg"
+    item.image = image
+    item_dao = CatalogItemDao()
+    item_dao.save(item)
+    # Create Image file from database
+    item = item_dao.find_by_title("Soccer Ball")
     file = open(IMAGE_PATH + item.image.get_name(), 'w+')
     file.write(item.image.data)
 

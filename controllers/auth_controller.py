@@ -15,16 +15,15 @@ import requests
 from flask_httpauth import HTTPBasicAuth
 auth = HTTPBasicAuth()
 
-# Google Client ID
-CLIENT_ID = json.loads(open('secrets_google.json', 'r').read())[
-    'web']['client_id']
-
-# Auth providers
 GOOGLE_PROVIDER = "google"
 FACEBOOK_PROVIDER = "facebook"
 BASIC_PROVIDER = "basic"
 
-# Create controller
+# Google Client ID
+CLIENT_ID = json.loads(open('secrets_google.json', 'r').read())[
+    'web']['client_id']
+
+# Create controllers
 auth_controller = Blueprint("auth_controller",
                             __name__,
                             url_prefix=BASE_API_URL)
@@ -96,8 +95,8 @@ def validate_user(user, confirm_password, user_dao):
 
     return True
 
-# Endpoints
 
+# GOOGLE AUTH
 
 @auth_controller.route("/auth/logout", methods=['POST'])
 def logout():
@@ -243,7 +242,7 @@ def googledisconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
 
-# FACEBOOK OAUTH2
+# FACEBOOK AUTH
 
 
 @auth_controller.route('/auth/fbconnect', methods=['POST'])

@@ -32,14 +32,12 @@
 
 
         <div class="social-logins">
-            Use
             <div id="signinButton">
                 <span class="g-signin" data-scope="openid email" data-clientid="631682872143-vbv9knrpl30bkkc9tc2l0vkrcgi25ocl.apps.googleusercontent.com"
                     data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin"
                     data-callback="signInCallback" data-approvalprompt="force">
                 </span>
             </div>
-            <span> Or </span>
             <button class="button">
                 <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
                     <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
@@ -152,7 +150,6 @@
             });
         })
     };
-
 
     function hideLoginForm(){
         $('#login-form').attr('style', 'display: none');

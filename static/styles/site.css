@@ -231,7 +231,13 @@ header, footer {
 .social-logins {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    border-top: solid 1px #9EB3C2;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#signinButton {
+    margin: 5px;
 }
 
 .user-name {
@@ -248,8 +254,9 @@ header, footer {
 
 /* CatalogItem Details */
 
-
-
+.details-nav {
+    margin-top: 10px;
+}
 
 /*  Edit-item
 ------------------------------------*/

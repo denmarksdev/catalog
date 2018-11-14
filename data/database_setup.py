@@ -58,7 +58,7 @@ class CatalogItem(Base):
 
     id = Column(Integer, primary_key=True)
     title = Column(String(20), nullable=False)
-    description = Column(String(300), nullable=False)
+    description = Column(String(800), nullable=False)
     date = Column(DateTime, nullable=False)
 
     user_id = Column(Integer(), ForeignKey('user.id'))

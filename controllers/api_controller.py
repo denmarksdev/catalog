@@ -19,9 +19,6 @@ def get_catalog():
 
 @api_controller.route("/item/<string:title>")
 def get_catalog_item(title):
-    """
-    Returns a JSON with all categories and their respective Catalog Item.
-    """
     dao = CatalogItemDao()
     itemCatalog = dao.find_by_title(title)
     if (itemCatalog == None):

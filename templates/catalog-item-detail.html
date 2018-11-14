@@ -16,7 +16,7 @@
        <strong>Description: </strong> {{ item.description }}
     </p>
     {% if is_owner %}
-    <nav>
+    <nav class="details-nav">
         <a class="button button-confirm" href="/catalog/{{ item.category.name }}/{{ item.title }}/edit">Edit</a>
         <a class="button button-danger" href="/catalog/{{ item.category.name }}/{{ item.title }}/delete">Delete</a>
     </nav>
