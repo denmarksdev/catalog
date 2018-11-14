@@ -29,7 +29,7 @@ The user can include, update and delete their own items.
 
 Samples:
 
-### http://localhost:8080/api/v1/catalog.json
+### http://localhost:8080/api/v1/catalog.json/{item_title}
 Return Catalog Item by Title
 ```
 {
@@ -42,8 +42,7 @@ Return Catalog Item by Title
   }
 }
 ```
-
-### http://localhost:8080/api/v1/catalog.json/{item_title}
+### http://localhost:8080/api/v1/catalog.json
 Returns all categories and their respective Catalog Items.
 ```
 {
