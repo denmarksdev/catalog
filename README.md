@@ -17,12 +17,12 @@ The user can include, update and delete their own items.
 # Usage
 
 1. Clone or download this repository
-1. Install all dependencies with follow command `pip install -r dependencies.txt`
-1. Download **JSON Google credentials APP** file and save file as **secrets_google.json** into root folder.
+1. Install all dependencies with the following command `pip install -r dependencies.txt`
+1. Download **Google JSON** file and save the file as **secrets_google.json** into the root folder.
    - ![](https://github.com/denmarksdev/catalog/blob/master/google_console.JPG?raw=true "Reporter tool")
 1. In the **secrets_facebook.json** replace **app_id** and **app_secret** your own credentials app.
    - ![](https://github.com/denmarksdev/catalog/blob/master/facebook_conf.JPG?raw=true "Reporter tool")
-1. Run app with foollow command-line `python application.json` 
+1. Run app with foollow command `python application.json` 
  
 
 # API JSON
@@ -30,8 +30,7 @@ The user can include, update and delete their own items.
 Samples:
 
 ### http://localhost:8080/api/v1/catalog.json
-Returns all categories and their respective Catalog Items.
-
+Return Catalog Item by Title
 ```
 {
   "Item": {
@@ -45,7 +44,6 @@ Returns all categories and their respective Catalog Items.
 ```
 
 ### http://localhost:8080/api/v1/catalog.json/{item_title}
-
 Returns all categories and their respective Catalog Items.
 ```
 {
@@ -91,10 +89,15 @@ Returns all categories and their respective Catalog Items.
 
 ![](https://github.com/denmarksdev/catalog/blob/master/catalog.JPG?raw=true "Catalog")
 
-## Catalog Item Detais
+## Catalog Item Details
 
 ![](https://github.com/denmarksdev/catalog/blob/master/catalog-item-details.JPG?raw=true "Catalog Item Details")
 
-## Catalog Mobile
+## Catalog in Mobile
 
 ![](https://github.com/denmarksdev/catalog/blob/master/catalog-mobile.JPG?raw=true "Catalog in mobile")
+
+
+
+
+Create project infrastructure
