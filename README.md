@@ -3,7 +3,7 @@
 The application has a list of items within a variety of categories, as well as a user registration and authentication system.
 The user can include, update and delete their own items.
 
-# Requirments
+# Requirements
 
 1. Require **Python 2.7**
    - [Windows](https://www.python.org/downloads/windows/)
