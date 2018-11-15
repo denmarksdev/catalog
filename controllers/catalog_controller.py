@@ -149,7 +149,8 @@ def edit_item(category_name, item_title):
         return redirect(url_for('catalog.show_catalog'))
 
 
-@catalog_controller.route('/<string:category_name>/<string:item_title>/delete', methods=['GET', 'POST'])
+@catalog_controller.route('/<string:category_name>/<string:item_title>/delete',
+                          methods=['GET', 'POST'])
 def delete_item(category_name, item_title):
     dao = CatalogItemDao()
 

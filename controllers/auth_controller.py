@@ -72,10 +72,7 @@ def show_signup_form():
         user.hash_password(user.password)
         # TODO: Save image user from form-data.
         user.picture = IMAGE_PATH + "default.png"
-        try:
-            user_dao.save(user)
-        except:
-            return make_response("Failed to save user data", 500)
+        user_dao.save(user)
         return redirect(url_for('auth_controller_pages.show_login'))
 
 
@@ -264,10 +261,9 @@ def fbconnecty():
     app_secret = json.loads(open('secrets_facebook.json', 'r').read())[
         'web']['app_secret']
 
-    url = ('https://graph.facebook.com/oauth/access_token' +
-           '?grant_type=fb_exchange_token&client_id=%s ' +
-           ' &client_secret=%s&fb_exchange_token=%s'
-           % (app_id, app_secret, access_token))
+    url = ('https://graph.facebook.com/oauth/access_token?' +
+           'grant_type=fb_exchange_token&client_id=%s&client_secret=%s' +
+           '&fb_exchange_token=%s' % (app_id, app_secret, access_token))
 
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
@@ -276,9 +272,8 @@ def fbconnecty():
 
     token = result.split(',')[0].split(':')[1].replace('"', '')
 
-    url = ('https://graph.facebook.com/v3.2/me' +
-           ' ?fields=name,id,email&access_token=%s'
-           % token)
+    url = ('https://graph.facebook.com/v3.2/me?' +
+           'fields=name,id,email&access_token=%s' % token)
 
     url = url.replace(',', '%2C')
 
