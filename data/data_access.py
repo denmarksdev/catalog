@@ -39,7 +39,7 @@ class UserDao(BaseDao):
         return self.session. \
             query(User). \
             filter_by(id=user_id) . \
-            one()
+            one_or_none()
 
     def find_by_username(self, username):
         return self.session. \
@@ -72,7 +72,7 @@ class CategoryDao(BaseDao):
         return self.session .\
             query(Category). \
             filter_by(name=category_name). \
-            one()
+            one_or_none()
 
     def get_all(self):
         return self.session. \
@@ -96,7 +96,7 @@ class CategoryDao(BaseDao):
     def count(self):
         return self.session. \
             query(func.count(Category.id)). \
-            one()[0]
+            one_or_none()[0]
 
 
 class CatalogItemDao(BaseDao):
@@ -118,28 +118,22 @@ class CatalogItemDao(BaseDao):
             filter(Category.name == category_name)
 
     def find(self, id):
-        try:
-            return self.session.query(CatalogItem). \
-                filter_by(id=id). \
-                one()
-        except:
-            print("Error find CatalogItem by id (%s) " % id)
+        return self.session.query(CatalogItem). \
+            filter_by(id=id). \
+            one_or_none()
 
     def find_by_title(self, title):
-        try:
-            return self.session. \
-                query(CatalogItem). \
-                filter_by(title=title). \
-                one()
-        except:
-            print("Erro find CatalogItem by title (%s) " % title)
+        return self.session. \
+            query(CatalogItem). \
+            filter_by(title=title). \
+            one_or_none()
 
     def find_by_category_name_and_title(self, category_name, catalog_title):
         return self.session. \
             query(CatalogItem). \
             filter(Category.name == category_name,
                    CatalogItem.title == catalog_title). \
-            one()
+            one_or_none()
 
     def has_item_by_title(self, title):
         return self.session. \
