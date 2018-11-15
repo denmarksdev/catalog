@@ -22,7 +22,7 @@ The user can include, update and delete their own items.
    - ![](https://github.com/denmarksdev/catalog/blob/master/google_console.JPG?raw=true "Reporter tool")
 1. In the **secrets_facebook.json** replace **app_id** and **app_secret** your own credentials app.
    - ![](https://github.com/denmarksdev/catalog/blob/master/facebook_config.jpg?raw=true "Reporter tool")
-1. Run app with foollow command `python application.json` 
+1. Run app with follow command `python application.py` 
  
 
 # API JSON
