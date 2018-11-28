@@ -21,9 +21,6 @@ GOOGLE_PROVIDER = "google"
 FACEBOOK_PROVIDER = "facebook"
 BASIC_PROVIDER = "basic"
 
-# Google Client ID
-CLIENT_ID = json.loads(open('secrets_google.json', 'r').read())[
-    'web']['client_id']
 
 # Create controllers
 auth_controller = Blueprint("auth_controller",
@@ -33,6 +30,14 @@ auth_controller = Blueprint("auth_controller",
 auth_pages = Blueprint("auth_controller_pages",
                        __name__,
                        template_folder='templates')
+
+# ROOT PATH of application
+import os
+ROOT_PATH = os.path.dirname(auth_controller.root_path)
+
+# Google Client ID
+CLIENT_ID = json.loads(open(ROOT_PATH + '/secrets_google.json', 'r').read())[
+    'web']['client_id']
 
 # Views pages
 
@@ -256,9 +261,11 @@ def fbconnecty():
 
     access_token = request.data
 
-    app_id = json.loads(open('secrets_facebook.json', 'r').read())[
+    secrets_path = ROOT_PATH + '/secrets_facebook.json'
+
+    app_id = json.loads(open(secrets_path, 'r').read())[
         'web']['app_id']
-    app_secret = json.loads(open('secrets_facebook.json', 'r').read())[
+    app_secret = json.loads(open(secrets_path, 'r').read())[
         'web']['app_secret']
 
     url = ('https://graph.facebook.com/oauth/access_token?'
