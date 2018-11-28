@@ -17,7 +17,7 @@ class User(Base):
     name = Column(String(80), nullable=False)
     picture = Column(String(250))
     username = Column(String(100), nullable=False)
-    password_hash = Column(String(64))
+    password_hash = Column(String)
 
     def hash_password(self, password):
         self.password_hash = pwd_context.encrypt(password)
