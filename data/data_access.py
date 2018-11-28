@@ -4,7 +4,6 @@ from sqlalchemy.orm import sessionmaker
 from database_setup import (Base, Category,
                             CatalogItem, CatalogImage,
                             User, engine)
-from constants import IMAGE_PATH
 
 # Perform CRUD Operation for Catalog database
 
