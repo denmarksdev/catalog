@@ -103,4 +103,5 @@ Returns all categories and their respective Catalog Items.
 - [How To Structure Large Flask Applications](https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications)
 - [Flask-restful](https://flask-restful.readthedocs.io/en/latest/quickstart.html)
 - [Sqlalchemy](https://docs.sqlalchemy.org/en/rel_1_2/)
+- [Unit of Work](https://io.made.com/repository-and-unit-of-work-pattern-in-python/)
 - ... And much [GRIT!!!](https://www.ted.com/talks/angela_lee_duckworth_grit_the_power_of_passion_and_perseverance?language=pt-br)
