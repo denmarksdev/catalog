@@ -22,7 +22,7 @@ The user can include, update and delete their own items.
    - ![](https://github.com/denmarksdev/catalog/blob/master/google_console.JPG?raw=true "Reporter tool")
 1. In the **secrets_facebook.json** replace **app_id** and **app_secret** your own credentials app.
    - ![](https://github.com/denmarksdev/catalog/blob/master/facebook_config.jpg?raw=true "Reporter tool")
-1. Run app with follow command `python application.py` 
+1. Run app with follow command `python run.py` 
  
 
 # API JSON
@@ -86,12 +86,21 @@ Returns all categories and their respective Catalog Items.
 # Screenshots
 ## Catalog
 
-![](https://github.com/denmarksdev/catalog/blob/master/catalog.JPG?raw=true "Catalog")
+![](https://github.com/denmarksdev/catalog/blob/master/github-images/catalog.JPG?raw=true "Catalog")
 
 ## Catalog Item Details
 
-![](https://github.com/denmarksdev/catalog/blob/master/catalog-item-details.JPG?raw=true "Catalog Item Details")
+![](https://github.com/denmarksdev/catalog/blob/master/github-images/catalog-item-details.JPG?raw=true "Catalog Item Details")
 
 ## Catalog in Mobile
 
-![](https://github.com/denmarksdev/catalog/blob/master/catalog-mobile.JPG?raw=true "Catalog in mobile")
+![](https://github.com/denmarksdev/catalog/blob/master/github-images/catalog-mobile.JPG?raw=true "Catalog in mobile")
+
+# If I have seen further ...
+## ... it is by standing on the shoulders of Giants (Isaac Newton)
+
+### Here are some sources that contribute to a project contruction
+- [How To Structure Large Flask Applications](https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications)
+- [Flask-restful](https://flask-restful.readthedocs.io/en/latest/quickstart.html)
+- [Sqlalchemy](https://docs.sqlalchemy.org/en/rel_1_2/)
+- ... And much [GRIT!!!](https://www.ted.com/talks/angela_lee_duckworth_grit_the_power_of_passion_and_perseverance?language=pt-br)
