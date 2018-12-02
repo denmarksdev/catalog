@@ -1,0 +1,82 @@
+{% extends "template.html" %}
+{% block body %}
+
+<div class="center-container content column">
+
+    {% if action == url_for('catalog.add_item') %}
+    <h1>Add Item</h1>
+    {% else %}
+    <h1>Edit Item</h1>
+    {% endif %}
+
+    <!-- MESSAGE FLASHING -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="message-alert">
+        {% for message in messages %}
+        <li><strong>{{ message }}</strong></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <!-- END MESSAGE FLASHING -->
+
+    <!-- FORM ERRORS -->
+    {% if form.errors %}
+    <div>
+        {% for field, error in form.errors.items() %}
+        {% for e in error %}
+        {{ e }}<br>
+        {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- END FORM ERRORS -->
+
+    <form method="POST" action="{{ action }}" enctype="multipart/form-data">
+
+        {{ form.csrf_token }}
+
+        <!-- Choose image -->
+        <img class="img-responsive" src="{{ url_image }}" id="imgPreview" alt="Category image" onclick="chooseFile()">
+        {{ form.image() }}
+        <!-- End Choose image -->
+
+        <div class="input-container">
+            {{ form.title.label }} {{ form.title(class_='login-input') }}
+        </div>
+
+        <div class="input-container">
+            {{ form.description.label }} {{ form.description(class_='login-input') }}
+        </div>
+
+        <div class="input-container">
+            {{ form.categories.label }} {{ form.categories(class_='category-select') }}
+        </div>
+
+        <input class="button button-confirm" type="submit" value="Submit">
+
+    </form>
+    <script>
+        var fileInput = document.getElementById('image');
+        fileInput.hidden = true;
+        
+        fileInput.addEventListener('change', function (event) {
+            var file = event.target.files[0];
+
+            const reader = new FileReader();
+            let input = document.getElementById("imgPreview")
+            reader.onload = (event) => {
+                input.setAttribute("src", event.target.result)
+            }
+            reader.readAsDataURL(file);
+        })
+
+        function chooseFile() {
+            document.getElementById('image').click();
+        }
+    </script>
+
+</div>
+
+{% endblock %}

@@ -17,7 +17,7 @@
     </p>
     {% if is_owner %}
     <nav class="details-nav">
-        <a class="button button-confirm" href="/catalog/{{ item.category.name }}/{{ item.title }}/edit">Edit</a>
+        <a class="button button-confirm" href="{{ url_for('catalog.edit_item',category_name=item.category.name,item_title=item.title) }}">Edit</a>
         <a class="button button-danger" href="/catalog/{{ item.category.name }}/{{ item.title }}/delete">Delete</a>
     </nav>
     {% endif %}
