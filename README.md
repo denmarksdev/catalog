@@ -19,10 +19,14 @@ The user can include, update and delete their own items.
 1. Clone or download this repository
 1. Install all dependencies with the following command `pip install -r requirements.txt`
 1. Download **Google JSON** file and save the file as **secrets_google.json** into the root folder.
-   - ![](https://github.com/denmarksdev/catalog/blob/master/google_console.JPG?raw=true "Reporter tool")
-1. In the **secrets_facebook.json** replace **app_id** and **app_secret** your own credentials app.
-   - ![](https://github.com/denmarksdev/catalog/blob/master/facebook_config.jpg?raw=true "Reporter tool")
-1. Run app with follow command `python run.py` 
+   
+   ![](https://github.com/denmarksdev/catalog/blob/master/github-images/google_console.JPG?raw=true "Reporter tool")
+   
+3. In the **secrets_facebook.json** replace **app_id** and **app_secret** your own credentials app.
+   
+   ![](https://github.com/denmarksdev/catalog/blob/master/github-images/facebook_config.jpg?raw=true "Reporter tool")
+   
+4. Run app with follow command `python run.py` 
  
 
 # API JSON
