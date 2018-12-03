@@ -2,6 +2,7 @@
 
 from app import db
 from app.mod_auth.models import User
+from config import PUBLIC_URL
 
 
 class Category(db.Model):
@@ -28,12 +29,11 @@ class CatalogImage(db.Model):
     def get_name(self):
         return '%s.%s' % (self.id, self.suffix,)
 
-       
     def get_url(self, base_url):
         """
         Define access a url image, base URL can change.
         base_url refers to a public address
-        """ 
+        """
         return ("%s/static/images/%s"
                 % (base_url, self.get_name(),))
 
@@ -57,7 +57,7 @@ class CatalogItem(db.Model):
                             single_parent=True)
 
     @property
-    def serialize(self, base_url='http://localhost:8080'):
+    def serialize(self, base_url=PUBLIC_URL):
         # Returns object in easily serializeable
         return {
             'id': self.id,
