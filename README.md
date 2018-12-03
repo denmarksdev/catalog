@@ -99,7 +99,7 @@ Returns all categories and their respective Catalog Items.
 # If I have seen further ...
 ## ... it is by standing on the shoulders of Giants (Isaac Newton)
 
-### Here are some sources that contribute to a project contruction
+### Here are some sources that contribute to a project construction
 - [How To Structure Large Flask Applications](https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications)
 - [Flask-restful](https://flask-restful.readthedocs.io/en/latest/quickstart.html)
 - [Sqlalchemy](https://docs.sqlalchemy.org/en/rel_1_2/)
