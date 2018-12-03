@@ -207,6 +207,9 @@ def delete_item(category_name, item_title):
     """
     Delete the Catalog Item
     """
+    if (not is_logged()):
+        return redirect(url_for('auth.show_signin'))
+
     repo = CatalogItemRepository(db.session)
 
     if (not is_logged()):
@@ -215,8 +218,7 @@ def delete_item(category_name, item_title):
     item = repo.find_by_title(item_title)
     url_image = item.image.get_url(PUBLIC_URL)
 
-    form = ItemDeleteForm(request.form)
-    if (form.validate_on_submit):
+    if request.method == 'POST':
         if item.image:
             delete_image_file(item.image)
         repo.delete(item)
