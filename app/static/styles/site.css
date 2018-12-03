@@ -165,6 +165,10 @@ header, footer {
 /*  Category & CatalogItem
 ------------------------------------*/
 
+.title {
+    font-size: 1.5em;
+}
+
 .item {
     color: #445E93;
     text-overflow: ellipsis;
@@ -252,11 +256,13 @@ header, footer {
     font-size: 0.8em
 }
 
+
 /* CatalogItem Details */
 
 .details-nav {
     margin-top: 10px;
 }
+
 
 /*  Edit-item
 ------------------------------------*/
@@ -300,6 +306,14 @@ header, footer {
 
 .message-alert {
     color: #F93943;
+}
+
+@media screen and (max-width: 600px) {
+
+    .title {
+        font-size: 1.3em;
+    }
+
 }
 
 @media screen and (max-width: 500px) {
@@ -350,6 +364,9 @@ header, footer {
         display: inline-block;
     }
     /* Catalog Items */
+    .title {
+        font-size: 1em;
+    }
     .button-add {
         margin: 5px;
         max-width: 80px;

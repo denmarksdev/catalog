@@ -6,12 +6,10 @@ from app.unit_of_work import CatalogUnitOfWorkManager
 from config import IMAGE_DIR
 
 
-def create(path):
+def create():
     """
     Initializa database with sample data
     """
-
-    print path
 
     db.create_all()
 

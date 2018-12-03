@@ -22,7 +22,7 @@ class Category(db.Model):
 
 class CatalogImage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    suffix = db.Column(db.String(3), nullable=False)
+    suffix = db.Column(db.String(5), nullable=False)
     data = db.Column(db.LargeBinary, nullable=False)
 
     def get_name(self):

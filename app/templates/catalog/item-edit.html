@@ -43,15 +43,15 @@
         <!-- End Choose image -->
 
         <div class="input-container">
-            {{ form.title.label }} {{ form.title(class_='login-input') }}
+            {{ form.title.label(class_="label") }} {{ form.title(class_='login-input') }}
         </div>
 
         <div class="input-container">
-            {{ form.description.label }} {{ form.description(class_='login-input') }}
+            {{ form.description.label(class_="label") }} {{ form.description(class_='input-textarea') }}
         </div>
 
         <div class="input-container">
-            {{ form.categories.label }} {{ form.categories(class_='category-select') }}
+            {{ form.categories.label(class_="label") }} {{ form.categories(class_='category-select') }}
         </div>
 
         <input class="button button-confirm" type="submit" value="Submit">
@@ -60,7 +60,7 @@
     <script>
         var fileInput = document.getElementById('image');
         fileInput.hidden = true;
-        
+
         fileInput.addEventListener('change', function (event) {
             var file = event.target.files[0];
 

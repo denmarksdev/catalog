@@ -19,7 +19,7 @@ PUBLIC_URL = "http://localhost:8080"
 
 # Define the database - we are working with
 # SQLite for this example
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(APP_ROOT, 'catalog.db')
+SQLALCHEMY_DATABASE_URI = 'postgresql://catalog:123@localhost/catalog'
 DATABASE_CONNECT_OPTIONS = {}
 
 # Application threads. A common general assumption is

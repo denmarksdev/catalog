@@ -8,14 +8,14 @@
     {% endif %}
 
     <div class="menu-container">
-        <h1>Categories</h1>
+        <h1 class="title categoty-title" >Categories</h1>
         <a id=menu>
             <i class="fas fa-bars fa-2x"></i>
         </a>
     </div>
 
     <aside class="categories" role="listitem">
-        <h1 class="category-title">Categories</h1>
+        <h1 class="title category-title">Categories</h1>
         <nav class="category items-container">
             {% for category in categories %}
             <a class="item category" href="/catalog/{{ category.name }}/items">{{ category.name }}</a>
@@ -24,9 +24,9 @@
     </aside>
     <section role="listitem">
         {% if items.count() > 1 %}
-        <h1>{{ category_name }} Items ( {{ items.count() }} items )</h1>
+        <h1 class="title">{{ category_name }} Items ( {{ items.count() }} items )</h1>
         {% else %}
-        <h1>{{ category_name }} Items ( {{ items.count() }} item )</h1>
+        <h1 class="title">{{ category_name }} Items ( {{ items.count() }} item )</h1>
         {% endif %}
         <div class="items-container">
             {% for item in items %}

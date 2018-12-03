@@ -1,8 +1,9 @@
 # Import Form
 from flask_wtf import FlaskForm
 
-# Import Form elements such as TextField, PasswordField
-from wtforms import TextField, SelectField, HiddenField
+# Import Form elements 
+from wtforms import TextField, SelectField, \
+    HiddenField, TextAreaField
 
 # Make input image some validations
 from flask_uploads import UploadSet, IMAGES
@@ -20,7 +21,7 @@ class ItemForm(FlaskForm):
     """
     title = TextField('Tilte', [
         Required(message='Forget the title?')])
-    description = TextField('Description', [
+    description = TextAreaField('Description', [
         Required(message='Forger the description?')])
     image = FileField('image', validators=[
         FileAllowed(['jpg', 'png'], 'Images only!')

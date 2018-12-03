@@ -7,13 +7,13 @@
         </a>
     {% endif %}
     <div class="menu-container">
-        <h1 class="category-title">Categories</h1>
+        <h1 class="title category-title">Categories</h1>
         <a id=menu>
             <i class="fas fa-bars  fa-2x"></i>
         </a>
     </div>
     <aside class="categories" role="listitem">
-        <h1 class="category-title">Categories</h1>
+        <h1 class="title">Categories</h1>
         <nav class="category items-container">
             {% for category in categories %}
             <a class="item category" href="/catalog/{{ category.name }}/items">{{ category.name }}</a>
@@ -21,7 +21,7 @@
         </nav>
     </aside>
     <section role="listitem">
-        <h1>Lastest Items</h1>
+        <h1 class="title">Lastest Items</h1>
         <div class="items-container">
             {% for item in lastedItems %}
             <a class="item" href="/catalog/{{ item.category.name }}/{{ item.title }}">
